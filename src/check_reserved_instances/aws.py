@@ -31,6 +31,11 @@ def create_boto_session(account):
     aws_role_arn = account['aws_role_arn']
     region = account['region']
 
+    if aws_access_key_id == "None":
+        aws_access_key_id = None
+    if aws_secret_access_key == "None":
+        aws_secret_access_key = None
+
     if aws_role_arn:
         sts_client = boto3.client('sts', region_name=region)
         creds = sts_client.assume_role(

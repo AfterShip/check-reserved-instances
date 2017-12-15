@@ -60,9 +60,9 @@ credentials that will be used to query for instances. Replace
 The following configuration options are supported:
 
 -  **aws\_access\_key\_id** (Optional str): The AWS IAM access key for a
-   specific user.
+   specific user. Allow 'None' to let boto3 handles credentials
 -  **aws\_secret\_access\_key** (Optional str): The AWS IAM secret key
-   for a specific user.
+   for a specific user. Allow 'None' to let boto3 handles credentials
 -  **aws\_role\_arn** (Optional str): The AWS IAM role to assume to authenticate
    with if you wish to use IAM roles to authenticate across accounts. See `AWS Documentation`_ for more information.
 -  **region** (Optional str): The AWS region to query for the account.

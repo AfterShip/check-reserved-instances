@@ -11,6 +11,8 @@ import jinja2
 
 import pkg_resources
 
+import datetime
+
 from check_reserved_instances.aws import instance_ids, reserve_expiry
 
 TEMPLATE_DIR = pkg_resources.resource_filename(
@@ -75,7 +77,7 @@ def report_results(config, results):
 
         print('\nSending emails to {}'.format(smtp_recipients))
         mailmsg = MIMEMultipart('alternative')
-        mailmsg['Subject'] = 'Reserved Instance Report'
+        mailmsg['Subject'] = 'Reserved Instance Report [' + config['Accounts'][0]['name'] + ']  - ' + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
         mailmsg['To'] = smtp_recipients
         mailmsg['From'] = smtp_sendas
         email_text = MIMEText(report_text, 'plain')
@@ -88,7 +90,7 @@ def report_results(config, results):
             smtp.starttls()
         if smtp_user:
             smtp.login(smtp_user, smtp_password)
-        smtp.sendmail(smtp_sendas, smtp_recipients, mailmsg)
+        smtp.sendmail(smtp_sendas, smtp_recipients.split(','), mailmsg)
         smtp.quit()
     else:
         print('\nNot sending email for this report')
