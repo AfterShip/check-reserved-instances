@@ -75,7 +75,7 @@ def report_results(config, results):
 
         print('\nSending emails to {}'.format(smtp_recipients))
         mailmsg = MIMEMultipart('alternative')
-        mailmsg['Subject'] = 'Reserved Instance Report'
+        mailmsg['Subject'] = 'Reserved Instance Report' + config['Accounts'][0]['name']
         mailmsg['To'] = smtp_recipients
         mailmsg['From'] = smtp_sendas
         email_text = MIMEText(report_text, 'plain')
